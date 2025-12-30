@@ -74,54 +74,61 @@ footer{text-align:center;color:#bdbdbd;margin-top:30px;font-size:0.85rem;}
 
 <script>
 document.getElementById("todayDate").textContent =
-  new Date().toLocaleDateString("en-GB", { day:"2-digit", month:"long", year:"numeric" });
+  new Date().toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+  });
 
 async function fetchNRBRates() {
-  const today = new Date().toISOString().slice(0,10); // YYYY-MM-DD
+  const today = new Date().toISOString().split("T")[0];
   const url = `https://www.nrb.org.np/api/forex/v1/rates?from=${today}&to=${today}&page=1&per_page=100`;
 
   try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Network issue");
-    const json = await response.json();
-    const data = json.data.payload || [];
+    const res = await fetch(url);
+    const json = await res.json();
 
+    const rates = json?.data?.payload?.[0]?.rates || [];
     const tbody = document.getElementById("ratesBody");
     tbody.innerHTML = "";
 
     const flagMap = {
-      INR: "in", USD: "us", EUR: "eu", GBP: "gb", CHF: "ch", AUD: "au",
-      CAD: "ca", SGD: "sg", JPY: "jp", CNY: "cn", SAR: "sa", QAR: "qa",
-      THB: "th", AED: "ae", MYR: "my", KRW: "kr", SEK: "se", DKK: "dk",
-      HKD: "hk", KWD: "kw", BHD: "bh", OMR: "om"
+      USD: "us", EUR: "eu", GBP: "gb", INR: "in", AUD: "au", CAD: "ca",
+      CHF: "ch", CNY: "cn", JPY: "jp", SGD: "sg", SAR: "sa", QAR: "qa",
+      AED: "ae", MYR: "my", KRW: "kr", SEK: "se", DKK: "dk",
+      HKD: "hk", KWD: "kw", BHD: "bh", OMR: "om", THB: "th"
     };
 
-    data.forEach(rate => {
+    rates.forEach(rate => {
+      const code = rate.currency.iso3;
+      const unit = rate.unit;
+      const buy = rate.buy;
+
+      const flag = flagMap[code]
+        ? `<img src="https://flagcdn.com/w40/${flagMap[code]}.png" class="currency-flag" alt="${code}">`
+        : "";
+
       const tr = document.createElement("tr");
-      const code = rate.ccy;       // Currency code
-      const unit = rate.unit;      
-      const buy = rate.buy;        
-
-      const flag = flagMap[code] ?
-        `<img src="https://flagcdn.com/w40/${flagMap[code]}.png" class="currency-flag" alt="${code}">` : "";
-
       tr.innerHTML = `
-        <td>${flag}${code}</td>
+        <td>${flag} ${rate.currency.name} (${code})</td>
         <td>${unit}</td>
         <td class="buy-rate">${buy}</td>
       `;
+
       tbody.appendChild(tr);
     });
 
   } catch (err) {
-    console.error("Fetch NRB API failed:", err);
+    console.error(err);
     document.getElementById("ratesBody").innerHTML =
-      `<tr><td colspan="3">Unable to load rates. Try again later.</td></tr>`;
+      `<tr><td colspan="3">NRB rates not available today</td></tr>`;
   }
 }
 
 fetchNRBRates();
 </script>
 
+
 </body>
 </html>
+
