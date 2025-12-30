@@ -3,76 +3,161 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kingsbury Entertainment - Daily NRB Forex Rates</title>
+<title>Kingsbury Entertainment – Daily NRB Forex Rates</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* Your original CSS here (same as before) */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
-body{min-height:100vh;background:linear-gradient(135deg,rgba(30,30,70,0.9),rgba(70,20,100,0.85),rgba(100,30,120,0.8));background-attachment:fixed;color:#fff;padding:20px;overflow-x:hidden;}
-.bg-element{position:absolute;border-radius:50%;background:rgba(255,255,255,0.05);z-index:-1;}
-.bg-element-1{width:300px;height:300px;top:5%;right:10%;animation:float 25s infinite linear;}
-.bg-element-2{width:200px;height:200px;bottom:10%;left:5%;animation:float 20s infinite linear reverse;}
-.bg-element-3{width:150px;height:150px;top:50%;left:10%;animation:float 15s infinite linear;}
-@keyframes float{0%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-20px) rotate(180deg);}100%{transform:translateY(0) rotate(360deg);}}
-.container{max-width:1200px;margin:auto;padding:20px;}
-header{text-align:center;margin-bottom:25px;padding:30px;background:rgba(0,0,0,0.3);border-radius:15px;position:relative;}
-header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#ff9800,#ff5722,#9c27b0);}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+}
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,
+        rgba(30,30,70,0.9),
+        rgba(70,20,100,0.85),
+        rgba(100,30,120,0.8));
+    background-attachment:fixed;
+    color:#fff;
+    padding:20px;
+}
+.container{max-width:1200px;margin:auto;}
+
+header{
+    text-align:center;
+    margin-bottom:25px;
+    padding:30px;
+    background:rgba(0,0,0,0.3);
+    border-radius:15px;
+}
 h1{font-size:3rem;color:#ffcc00;}
 .subhead{font-size:1.6rem;color:#4fc3f7;}
-.date-info{text-align:right;font-size:1.1rem;color:#e0e00;margin-bottom:12px;}
-.forex-heading{text-align:center;font-size:2rem;margin:30px 0;color:#ff9800;}
-.forex-container{background:rgba(0,0,0,0.3);border-radius:15px;padding:25px;}
-.forex-table{width:100%;border-collapse:collapse;}
-.forex-table th{background:rgba(9,132,227,0.4);padding:15px;text-align:left;}
-.forex-table th:nth-child(2),.forex-table th:nth-child(3){text-align:center;}
-.forex-table td{padding:14px;border-bottom:1px solid rgba(255,255,255,0.1);}
-.forex-table td:nth-child(2),.forex-table td:nth-child(3){text-align:center;}
-.forex-table tr:nth-child(even){background:rgba(255,255,255,0.05);}
-.currency-flag{width:28px;height:18px;margin-right:8px;vertical-align:middle;}
-.buy-rate{color:#4caf50;font-weight:bold;}
-.source{text-align:center;color:#81d4fa;margin-top:20px;}
-footer{text-align:center;color:#bdbdbd;margin-top:30px;font-size:0.85rem;}
+
+.date-info{
+    text-align:right;
+    font-size:1.1rem;
+    margin-bottom:15px;
+}
+
+.forex-heading{
+    text-align:center;
+    font-size:2rem;
+    margin:25px 0;
+    color:#ff9800;
+}
+
+.forex-container{
+    background:rgba(0,0,0,0.3);
+    border-radius:15px;
+    padding:25px;
+}
+
+.forex-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.forex-table th{
+    background:rgba(9,132,227,0.45);
+    padding:15px;
+    text-align:left;
+}
+.forex-table th:nth-child(2),
+.forex-table th:nth-child(3){
+    text-align:center;
+}
+
+.forex-table td{
+    padding:14px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+}
+.forex-table td:nth-child(2),
+.forex-table td:nth-child(3){
+    text-align:center;
+}
+
+.forex-table tr:nth-child(even){
+    background:rgba(255,255,255,0.05);
+}
+
+.inr-row{
+    background:rgba(255,193,7,0.25);
+    border-left:4px solid #ff9800;
+}
+
+.currency-flag{
+    width:28px;
+    height:18px;
+    margin-right:8px;
+    vertical-align:middle;
+}
+
+.buy-rate{
+    color:#4caf50;
+    font-weight:bold;
+}
+
+.source{
+    margin-top:20px;
+    text-align:center;
+    color:#81d4fa;
+}
+
+footer{
+    margin-top:30px;
+    text-align:center;
+    font-size:0.85rem;
+    color:#bdbdbd;
+}
 </style>
 </head>
+
 <body>
-
-<div class="bg-element bg-element-1"></div>
-<div class="bg-element bg-element-2"></div>
-<div class="bg-element bg-element-3"></div>
-
 <div class="container">
+
 <header>
     <h1>KINGSBURY ENTERTAINMENT PVT. LTD.</h1>
     <div class="subhead">BIRTAMODE-03, JHAPA</div>
 </header>
 
-<div class="date-info">Date: <strong><span id="todayDate"></span></strong></div>
+<div class="date-info">
+    Date: <strong><span id="todayDate"></span></strong>
+</div>
 
-<h2 class="forex-heading"><i class="fas fa-chart-line"></i> DAILY NRB EXCHANGE RATES</h2>
+<h2 class="forex-heading">
+    <i class="fas fa-chart-line"></i> DAILY NRB EXCHANGE RATES
+</h2>
 
 <div class="forex-container">
 <table class="forex-table">
 <thead>
 <tr>
-    <th width="50%">CURRENCY</th>
+    <th width="55%">CURRENCY</th>
     <th width="15%">UNIT</th>
-    <th width="35%">BUY (NRs)</th>
+    <th width="30%">BUY (NRs)</th>
 </tr>
 </thead>
 <tbody id="ratesBody">
-<!-- Filled dynamically -->
+<tr><td colspan="3">Loading NRB rates...</td></tr>
 </tbody>
 </table>
 
-<div class="source"><i class="fas fa-database"></i> SOURCE: Nepal Rastra Bank (NRB)</div>
+<div class="source">
+<i class="fas fa-database"></i> SOURCE: Nepal Rastra Bank (NRB)
+</div>
 </div>
 
-<footer>© 2025 Kingsbury Entertainment Pvt. Ltd. | Rates subject to change</footer>
+<footer>
+© 2025 Kingsbury Entertainment Pvt. Ltd. | Rates subject to change
+</footer>
+
 </div>
 
 <script>
+// Show today's date
 document.getElementById("todayDate").textContent =
   new Date().toLocaleDateString("en-GB", {
     day: "2-digit",
@@ -80,6 +165,7 @@ document.getElementById("todayDate").textContent =
     year: "numeric"
   });
 
+// Fetch NRB rates
 async function fetchNRBRates() {
   const today = new Date().toISOString().split("T")[0];
   const url = `https://www.nrb.org.np/api/forex/v1/rates?from=${today}&to=${today}&page=1&per_page=100`;
@@ -93,24 +179,30 @@ async function fetchNRBRates() {
     tbody.innerHTML = "";
 
     const flagMap = {
-      USD: "us", EUR: "eu", GBP: "gb", INR: "in", AUD: "au", CAD: "ca",
-      CHF: "ch", CNY: "cn", JPY: "jp", SGD: "sg", SAR: "sa", QAR: "qa",
-      AED: "ae", MYR: "my", KRW: "kr", SEK: "se", DKK: "dk",
-      HKD: "hk", KWD: "kw", BHD: "bh", OMR: "om", THB: "th"
+      USD:"us", EUR:"eu", GBP:"gb", INR:"in", AUD:"au", CAD:"ca",
+      CHF:"ch", CNY:"cn", JPY:"jp", SGD:"sg", SAR:"sa", QAR:"qa",
+      AED:"ae", MYR:"my", KRW:"kr", SEK:"se", DKK:"dk",
+      HKD:"hk", KWD:"kw", BHD:"bh", OMR:"om", THB:"th"
     };
 
     rates.forEach(rate => {
       const code = rate.currency.iso3;
-      const unit = rate.unit;
+      const name = rate.currency.name;
       const buy = rate.buy;
+
+      // FIX FOR UNITS
+      let unit = rate.unit ?? 1;
+      if (code === "INR") unit = 100;
 
       const flag = flagMap[code]
         ? `<img src="https://flagcdn.com/w40/${flagMap[code]}.png" class="currency-flag" alt="${code}">`
         : "";
 
       const tr = document.createElement("tr");
+      if (code === "INR") tr.classList.add("inr-row");
+
       tr.innerHTML = `
-        <td>${flag} ${rate.currency.name} (${code})</td>
+        <td>${flag} ${name} (${code})</td>
         <td>${unit}</td>
         <td class="buy-rate">${buy}</td>
       `;
@@ -118,17 +210,19 @@ async function fetchNRBRates() {
       tbody.appendChild(tr);
     });
 
+    if (rates.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="3">NRB rates not published yet today</td></tr>`;
+    }
+
   } catch (err) {
-    console.error(err);
     document.getElementById("ratesBody").innerHTML =
-      `<tr><td colspan="3">NRB rates not available today</td></tr>`;
+      `<tr><td colspan="3">Unable to load NRB rates</td></tr>`;
+    console.error(err);
   }
 }
 
 fetchNRBRates();
 </script>
 
-
 </body>
 </html>
-
